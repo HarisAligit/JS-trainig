@@ -84,7 +84,7 @@ function resolveAfter2Seconds(x) {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve("resolved");
-      }, 1100);
+      }, 100);
     });
   } else {
     throw new Error("Not Resolved, Value must be greater than 1!");
@@ -116,3 +116,61 @@ log.debug("Now Testing HOFs!\n\n");
 log.warning(
   "Using Regular Non Modular Approach results in too much of code duplication violating the DRY principle"
 );
+
+let radius = [1, 2, 3, 4, 5];
+
+const calArea = function (radius) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(Math.PI * (radius[i] * radius[i]));
+  }
+  return output;
+};
+
+const calCircum = function (radius) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(2 * Math.PI * radius[i]);
+  }
+  return output;
+};
+
+const calDiam = function (radius) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(2 * radius[i]);
+  }
+  return output;
+};
+
+console.log("\nArea: ", calArea(radius));
+console.log("\nCircumference: ", calCircum(radius));
+console.log("\nDiameter: ", calDiam(radius));
+
+log.success(
+  "Now Using Modular Approach with HOF that will not violate the DRY principle and stil result in same answer without that much hassle"
+);
+
+const Area = function (x) {
+  return Math.PI * (x * x);
+};
+
+const Circum = function (x) {
+  return 2 * Math.PI * x;
+};
+
+const Diam = function (x) {
+  return 2 * x;
+};
+
+const calculate = function (radius, logic) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(logic(radius[i]));
+  }
+  return output;
+};
+
+console.log("\nArea: ", calculate(radius, Area));
+console.log("\nCircumference: ", calculate(radius, Circum));
+console.log("\nDiameter: ", calculate(radius, Diam));
