@@ -174,3 +174,21 @@ const calculate = function (radius, logic) {
 console.log("\nArea: ", calculate(radius, Area));
 console.log("\nCircumference: ", calculate(radius, Circum));
 console.log("\nDiameter: ", calculate(radius, Diam));
+
+log.show();
+log.debug("Making out customize function like map\n\n");
+
+Array.prototype.customMap = function (logic) {
+  const output = [];
+  for (let i = 0; i < this.length; i++) {
+    output.push(logic(this[i]));
+  }
+  return output;
+};
+
+console.log("\nArea: ", radius.customMap(Area));
+console.log("\nCircumference: ", radius.customMap(Circum));
+console.log("\nDiameter: ", radius.customMap(Diam));
+
+log.show();
+log.success("Hence, the results are same!");
