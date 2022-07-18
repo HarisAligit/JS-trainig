@@ -234,3 +234,21 @@ const arrayIterator = function* (arr) {
 
 const arrit = arrayIterator([1, 3, 5, 7, 9, 11]);
 console.table(arrit.next());
+
+const customGenerateID = function* () {
+  let id = 1;
+  while (true) {
+    const x = yield id;
+    if (x != null) {
+      id += x;
+    } else {
+      id++;
+    }
+  }
+};
+
+const gx = customGenerateID();
+console.table(gx.next());
+console.table(gx.next(3)); // increment by 3
+console.table(gx.next()); // null passed so increment by 1
+console.table(gx.return(10)); // return 10 and exit generator
