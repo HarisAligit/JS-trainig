@@ -221,3 +221,16 @@ console.table(generate2.next()); // value: undefined, done: true // cause it has
 
 const generate2copy = generate2;
 console.table(generate2copy.next()); // will result the same cause the gennerator has done generating
+
+// Adding Generators
+log.show();
+log.debug("Using Generators as an Iterator!\n\n");
+
+const arrayIterator = function* (arr) {
+  for (let i = 0; i < arr.length; i++) {
+    yield arr[i];
+  }
+};
+
+const arrit = arrayIterator([1, 3, 5, 7, 9, 11]);
+console.table(arrit.next());
