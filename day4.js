@@ -192,3 +192,32 @@ console.log("\nDiameter: ", radius.customMap(Diam));
 
 log.show();
 log.success("Hence, the results are same!");
+
+// Adding Generators
+log.show();
+log.debug("Generators!\n\n");
+
+const SimpleGenerator = function* () {
+  yield 1;
+  yield 2;
+};
+
+const generateID = function* () {
+  let id = 1;
+  while (true) {
+    yield id++;
+  }
+};
+
+const generate = generateID();
+console.table(generate.next());
+console.table(generate.next());
+console.table(generate.next()); // return done: false cause it is an infinte loop;
+
+const generate2 = SimpleGenerator();
+console.table(generate2.next());
+console.table(generate2.next());
+console.table(generate2.next()); // value: undefined, done: true // cause it has ended!e
+
+const generate2copy = generate2;
+console.table(generate2copy.next()); // will result the same cause the gennerator has done generating
